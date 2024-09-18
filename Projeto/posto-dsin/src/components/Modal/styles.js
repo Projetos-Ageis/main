@@ -15,7 +15,8 @@ export const ModalContainer = styled.main`
   }
   .maps {
     width: 400px;
-    height: 400px;
+    height: 300px;
+    margin-top: 50px;
     margin-right: 20px;
   }
   .buttonBack {
@@ -91,11 +92,13 @@ export const InformationsContainer = styled.div`
   }
   h1 {
     font-size: 35px;
+    text-align: center;
 
   }
   p {
     margin-top: 8px;
     margin-bottom: 8px;
+    text-align: center;
   }
 `
 
