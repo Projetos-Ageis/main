@@ -4,6 +4,7 @@ export const RegisterContainer = styled.main`
     display: flex;
     justify-content: center;
     padding: 50px;
+    background-color: ${(props) => props.theme["gray200"]};
 `
 export const BodyContainer = styled.div`
     background-color: ${(props) => props.theme["gray700"]};
