@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home/index.jsx'
 import { Register } from './pages/Register/index.jsx'
+import { Login } from './pages/Login/index.jsx'
 
 export function Router() {
   return (

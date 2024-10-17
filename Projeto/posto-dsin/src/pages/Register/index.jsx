@@ -25,7 +25,7 @@ export function Register() {
                     </InputsContainer>
                     <button>CADASTRAR-SE</button>
                 </form>
-                <a href="/login">Já sou cliente.</a>
+                <a href="/login">Já sou cliente</a>
             </BodyContainer>
         </RegisterContainer>
     )
