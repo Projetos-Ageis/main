@@ -9,11 +9,11 @@ export function Login() {
                 <form action="">
                     <InputsContainer>
                         <p>Email:</p>
-                        <input type="text" />
+                        <input type="text" placeholder='Email' />
                     </InputsContainer>
                     <InputsContainer>
                         <p>Senha:</p>
-                        <input type="text" />
+                        <input type="text" placeholder='Senha'/>
                     </InputsContainer>
                     <button>LOGAR</button>
                 </form>

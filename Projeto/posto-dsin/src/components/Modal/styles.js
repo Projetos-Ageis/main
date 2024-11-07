@@ -1,13 +1,17 @@
 import styled from 'styled-components'
 
 export const ModalContainer = styled.main`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1001;
+  transform: translate(-50%, -50%);
   background-color: ${(props) => props.theme["gray700"]};
   color: ${(props) => props.theme.white};
   width: 800px;
   height: 530px;
   padding: 10px;
   border-radius: 16px;
-  
   .container {
     display: flex;
     justify-content: center;

@@ -9,19 +9,19 @@ export function Register() {
                 <form action="">
                     <InputsContainer>
                         <p>Nome:</p>
-                        <input type="text" />
+                        <input type="text" placeholder='Nome'/>
                     </InputsContainer>
                     <InputsContainer>
                         <p>Email:</p>
-                        <input type="text" />
+                        <input type="text" placeholder='Email' />
                     </InputsContainer>
                     <InputsContainer>
                         <p>CNPJ:</p>
-                        <input type="number" />
+                        <input type="number" placeholder='CNPJ'/>
                     </InputsContainer>
                     <InputsContainer>
                         <p>Senha:</p>
-                        <input type="text" />
+                        <input type="text" placeholder='Senha'/>
                     </InputsContainer>
                     <button>CADASTRAR-SE</button>
                 </form>
