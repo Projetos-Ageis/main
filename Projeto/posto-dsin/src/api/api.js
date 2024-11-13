@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ID_TOKEN = "id_token";
+const ID_TOKEN = 'authToken';
 
 let api = axios.create({
     baseURL: "https://localhost:7220/api",

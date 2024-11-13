@@ -10,15 +10,6 @@ export const GetOdata = async () => {
       return { success: false, message: "Erro de login" };
     }
   };
-export const GetPosto = async () => {
-    try {
-      const response = await api.get("/DonoPosto/postos");
-      return response.data;
-    } catch (error) {
-      console.error("Erro a puxar informação:", error);
-      return { success: false, message: "Erro de login" };
-    }
-  };
   
 
   

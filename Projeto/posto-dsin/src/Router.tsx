@@ -8,9 +8,9 @@ import { Profile } from './pages/Profile/index.jsx'
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<Profile />}/>
     </Routes>
   )

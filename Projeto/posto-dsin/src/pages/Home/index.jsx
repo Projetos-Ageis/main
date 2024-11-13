@@ -3,51 +3,58 @@ import { Modal } from '../../components/Modal';
 import { HeaderComp } from '../../components/Header';
 import { HomeContainer } from './styles';
 import { Block } from '../../components/Block';
-import { GetOdata } from './actions';
+import { GetOdata,GetPosto } from './actions';
 
 export function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loginResponse, setLoginResponse] = useState(null);
+  const [userResponse, setUserResponse] = useState(null);
+  const [selectedPosto, setSelectedPosto] = useState(null);
+  const [postoResponse, setPostoResponse] = useState(null);
   
-  const handleBlockClick = () => {
+  const handleBlockClick = (posto) => {
+    setSelectedPosto(posto);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedPosto(null);
   };
 
   useEffect(() => {
-    const login = async () => {
-      const email = "paulofusco@gmail.com";
-      const senha = "paulo123";
+    const information = async () => {
       
       try {
-        const response = await GetOdata(email, senha);
-        setLoginResponse(response);
-
-        if (response.token) { // Supondo que o token venha em response.token
-          localStorage.setItem("authToken", response.token); // Armazena o token no localStorage
-          console.log("Token armazenado com sucesso:", response.token);
-        } else {
-          console.log("Token não encontrado na resposta");
-        }
+        const response = await GetOdata();
+        setUserResponse(response);
+        console.log(response)
       } catch (error) {
-        console.error("Erro ao tentar logar:", error);
+        console.error("Erro buscar informação usuario:", error);
+      }
+    };
+    const informationPostos = async () => {
+      
+      try {
+        const response = await GetPosto();
+        setPostoResponse(response);
+        console.log(response)
+      } catch (error) {
+        console.error("Erro buscar informação posto:", error);
       }
     };
 
-    login();
+    information();
+    informationPostos();
   }, []);
   return (
     <HomeContainer>
       <HeaderComp />
       <div className="blocks">
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
-          <Block key={index} onClick={handleBlockClick} />
+        {postoResponse?.map((posto, index) => (
+          <Block information={posto} key={index} onClick={() => handleBlockClick(posto)} />
         ))}
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} posto={selectedPosto}/>
     </HomeContainer>
   );
 }

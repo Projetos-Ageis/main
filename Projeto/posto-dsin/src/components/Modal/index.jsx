@@ -11,9 +11,9 @@ import seta from "../../assets/seta.svg";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
-export function Modal({ isOpen, onClose }) {
+export function Modal({ isOpen, onClose,posto }) {
   if (!isOpen) return null;
-  
+  console.log(posto)
   return (
     <div 
         style={{
@@ -34,9 +34,9 @@ export function Modal({ isOpen, onClose }) {
       <div className="container">
         <InformationsContainer>
           <img src={ipiranga} alt="Bandeira" className="flag" />
-          <h1>Auto Posto Universitário</h1>
-          <p>Avenida Hygino Muzzy Filho, 1001, Marília-SP, Cep 17525–902</p>
-          <p>(14) 2105-4000</p>
+          <h1>{posto?.bandeira}</h1>
+          <p>{posto?.endereco}</p>
+          <p>{posto?.telefone}</p>
           <button>
             <img
               src={seta}
@@ -54,7 +54,7 @@ export function Modal({ isOpen, onClose }) {
                 <img src={arrowUp} alt="" />
               </h2>
               <h2 className="up">
-                <span>R$</span>5,96
+                <span>R$</span>{posto?.gasolina}
               </h2>
             </div>
             <div>
@@ -63,7 +63,7 @@ export function Modal({ isOpen, onClose }) {
                 <img src={arrowUp} alt="" />
               </h2>
               <h2 className="up">
-                <span>R$</span>5,96
+                <span>R$</span>{posto?.etanol}
               </h2>
             </div>
             <div>
@@ -72,7 +72,7 @@ export function Modal({ isOpen, onClose }) {
                 <img src={arrowDown} alt="" />
               </h2>
               <h2 className="down">
-                <span>R$</span>5,96
+                <span>R$</span>{posto?.diesel}
               </h2>
             </div>
           </PricesContainer>

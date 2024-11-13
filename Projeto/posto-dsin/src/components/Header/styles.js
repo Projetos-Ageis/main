@@ -7,6 +7,9 @@ export const HeaderContainer = styled.main`
   align-items: center;
   padding: 40px 30px;
   height: 80px;
+  a {
+    text-decoration: none;
+  }
   .logo{
     margin-top: 30px;
     width: 200px;
