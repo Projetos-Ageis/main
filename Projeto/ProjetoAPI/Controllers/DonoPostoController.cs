@@ -75,7 +75,7 @@ namespace ProjetoAPI.Controllers
             if (donoPostoService.ValidarCredenciais(donoPosto.email, donoPosto.senha))
             {
                 var token = tokenService.GenerateJwtToken(donoPosto.email);
-                return Ok(token);
+                return Ok(new {Token = token});
             }
             return BadRequest();
         }
