@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
+    "axios": "^1.7.7",
     "date": "^2.0.5",
     "date-fns": "^3.6.0",
     "fns": "^1.0.0",
