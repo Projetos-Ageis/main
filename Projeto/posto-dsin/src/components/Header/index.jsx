@@ -10,7 +10,7 @@ export function HeaderComp() {
             <div style={{display: "flex",alignItems: "center",gap: '15px'}}>
                 <div className='details'>
                     <p className='h2'>Bem Vindo,</p>
-                    <p>UserName</p>
+                    <a href="/profile">UserName</a>
                 </div>
                 <img src={User} alt="" className='user'/>
             </div>

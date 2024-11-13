@@ -30,4 +30,7 @@ export const HeaderContainer = styled.main`
     width: 54px;
     height: 54px;
   }
+  a{
+    color: ${(props) => props.theme["yellow300"]};
+  }
 `
