@@ -64,5 +64,17 @@ namespace ProjetoAPI.Services
             transaction.Commit();
             return true;
         }
+        public IEnumerable<Posto> GetPostos()
+        {
+            using var session = sessionFactory.OpenSession();
+            var postos = session.Query<Posto>().OrderBy(posto => posto.Gasolina).ToList();
+            return postos;
+        }
+        public IEnumerable<Posto> GetPostos2()
+        {
+            using var session = sessionFactory.OpenSession();
+            var postos = session.Query<Posto>().OrderByDescending(posto => posto.PostoId).ToList();
+            return postos;
+        }
     }
 }
