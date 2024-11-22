@@ -21,6 +21,32 @@ namespace ProjetoAPI.Controllers
             this.postoService = postoService;
             this.sessionFactory = sessionFactory;
         }
+        [HttpGet("getporpreco")]
+        public IActionResult GetPostos()
+        {
+            try
+            {
+                var postos = postoService.GetPostos();
+                return Ok(postos);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+        }
+        [HttpGet("getporid")]
+        public IActionResult GetPostos2()
+        {
+            try
+            {
+                var postos = postoService.GetPostos2();
+                return Ok(postos);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+        }
         [Authorize]
         [HttpPut("editar")]
         public IActionResult Editar(int id, [FromBody] PostoDTO posto)

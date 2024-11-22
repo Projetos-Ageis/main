@@ -34,9 +34,9 @@ namespace ProjetoAPI.Controllers
                 var postos = donoPostoService.MostrarPostos(donopostoId);
                 return Ok(postos);
             }
-            catch (Exception error)
+            catch (Exception erro)
             {
-                return BadRequest(error.Message);
+                return BadRequest(erro.Message);
             }
         }
         [Authorize]
@@ -54,9 +54,9 @@ namespace ProjetoAPI.Controllers
                 var donoposto = donoPostoService.MostrarInformacoes(donopostoId);
                 return Ok(donoposto);
             }
-            catch (Exception error)
+            catch (Exception erro)
             {
-                return BadRequest(error.Message);
+                return BadRequest(erro.Message);
             }
         }
         [HttpPost("criarconta")]
@@ -75,7 +75,7 @@ namespace ProjetoAPI.Controllers
             if (donoPostoService.ValidarCredenciais(donoPosto.email, donoPosto.senha))
             {
                 var token = tokenService.GenerateJwtToken(donoPosto.email);
-                return Ok(token);
+                return Ok( new { Token = token});
             }
             return BadRequest();
         }
@@ -89,13 +89,10 @@ namespace ProjetoAPI.Controllers
                 return Unauthorized("Usuário não identificado.");
             }
             int donopostoId = int.Parse(userIdClaim.Value);
-            if (donoPostoService.ValidarPosto(posto.CNPJ, posto.Endereco))
+            bool sucesso = donoPostoService.CriarPosto(donopostoId, posto);
+            if (sucesso)
             {
-                bool sucesso = donoPostoService.CriarPosto(donopostoId, posto);
-                if (sucesso)
-                {
-                    return Ok("Posto criado com sucesso!");
-                }
+                return Ok("Posto criado com sucesso!");
             }
             return BadRequest($"Falha ao criar posto");
         }
