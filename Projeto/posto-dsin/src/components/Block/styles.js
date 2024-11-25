@@ -24,10 +24,13 @@ export const BlockContainer = styled.div`
     flex-direction: column;
     gap: 3px;
     .down {
-    color: ${(props) => props.theme.green};
+    color: ${(props) => props.theme.white};
   }
   .up {
-    color: ${(props) => props.theme.red};
+    color: ${(props) => props.theme.white};
+  }
+  span {
+    color: #C4C4CC;
   }
   }
 `

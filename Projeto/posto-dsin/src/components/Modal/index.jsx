@@ -1,16 +1,16 @@
+import "leaflet/dist/leaflet.css";
 import React, { useEffect, useState } from "react";
+import { IoMdArrowBack } from "react-icons/io";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import arrowDown from "../../assets/arrowDown.svg";
+import arrowUp from "../../assets/arrowUp.svg";
+import ipiranga from "../../assets/ipiranga.svg";
+import seta from "../../assets/seta.svg";
 import {
   InformationsContainer,
   ModalContainer,
   PricesContainer,
 } from "./styles";
-import { IoMdArrowBack } from "react-icons/io";
-import ipiranga from "../../assets/ipiranga.svg";
-import arrowDown from "../../assets/arrowDown.svg";
-import arrowUp from "../../assets/arrowUp.svg";
-import seta from "../../assets/seta.svg";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 export function Modal({ isOpen, onClose, posto }) {
   const [coordinates, setCoordinates] = useState(null); // Começa como null
@@ -68,7 +68,18 @@ export function Modal({ isOpen, onClose, posto }) {
             <h1>{posto?.bandeira}</h1>
             <p>{posto?.endereco}</p>
             <p>{posto?.telefone}</p>
-            <button>
+            <button
+              onClick={() => {
+                if (posto?.endereco) {
+                  const mapsUrl = `https://www.google.com/maps?q=${encodeURIComponent(
+                    posto.endereco
+                  )}`;
+                  window.open(mapsUrl, "_blank");
+                } else {
+                  alert("Endereço não disponível.");
+                }
+              }}
+            >
               <img
                 src={seta}
                 alt="Seta indicando para virar a direita"
@@ -82,7 +93,6 @@ export function Modal({ isOpen, onClose, posto }) {
               <div>
                 <h2 className="type">
                   Gasolina
-                  <img src={arrowUp} alt="" />
                 </h2>
                 <h2 className="up">
                   <span>R$</span>
@@ -92,7 +102,6 @@ export function Modal({ isOpen, onClose, posto }) {
               <div>
                 <h2 className="type">
                   Etanol
-                  <img src={arrowUp} alt="" />
                 </h2>
                 <h2 className="up">
                   <span>R$</span>
@@ -102,7 +111,6 @@ export function Modal({ isOpen, onClose, posto }) {
               <div>
                 <h2 className="type">
                   Diesel
-                  <img src={arrowDown} alt="" />
                 </h2>
                 <h2 className="down">
                   <span>R$</span>
@@ -115,7 +123,6 @@ export function Modal({ isOpen, onClose, posto }) {
                 center={[coordinates.lat, coordinates.lng]}
                 zoom={17}
                 className="maps"
-                
               >
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

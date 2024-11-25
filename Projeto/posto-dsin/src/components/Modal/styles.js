@@ -64,10 +64,10 @@ export const PricesContainer = styled.div`
     }
   }
   .down {
-    color: ${(props) => props.theme.green};
+    color: ${(props) => props.theme.yellow};
   }
   .up {
-    color: ${(props) => props.theme.red};
+    color: ${(props) => props.theme.yellow};
   }
 `
 export const InformationsContainer = styled.div`
