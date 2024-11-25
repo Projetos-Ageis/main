@@ -1,53 +1,67 @@
-import { useState, useEffect } from 'react';
-import { BodyContainer, RegisterGasContainer, InputsContainer } from './styles';
-import logoDsin from '../../assets/logoDsin.svg';
-import { GetOdata, NovoPosto } from './actions';
+import { useState, useEffect } from "react";
+import { BodyContainer, RegisterGasContainer, InputsContainer } from "./styles";
+import logoDsin from "../../assets/logoDsin.svg";
+import { GetOdata, NovoPosto } from "./actions";
+import { useNavigate } from 'react-router-dom'; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Profile() {
-  const [nome, setNome] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [cnpj, setCNPJ] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [horario, setHorario] = useState('');
+  const [nome, setNome] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [cnpj, setCNPJ] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [horario, setHorario] = useState("");
   const [priceD, setPriceD] = useState();
   const [priceG, setPriceG] = useState();
   const [priceE, setPriceE] = useState();
+  const navigate = useNavigate(); 
 
   const [userInformation, setUserInformation] = useState(null);
 
   useEffect(() => {
     const fetchUserInformation = async () => {
       try {
-        const response = await GetOdata(); 
+        const response = await GetOdata();
         setUserInformation(response);
-        console.log(response);
       } catch (error) {
         console.error("Erro ao tentar obter informações:", error);
       }
     };
 
     fetchUserInformation();
-  }, []); 
+  }, []);
 
   const register = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     try {
-     
-      const response = await NovoPosto(cnpj, endereco, telefone, horario, nome, priceG,priceD, priceE);
-      console.log(response); 
+      const response = await NovoPosto(
+        cnpj,
+        endereco,
+        telefone,
+        horario,
+        nome,
+        priceG,
+        priceD,
+        priceE
+      );
+      toast.success("Posto cadastrado com sucesso!");
+      navigate("/home");
     } catch (error) {
-      console.error('Erro ao tentar registrar:', error);
+      console.error("Erro ao tentar registrar:", error);
     }
   };
 
   return (
     <RegisterGasContainer>
       <header>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
           <div className="details">
             <p className="h2">Bem-vindo,</p>
-            <p className="h2">{userInformation ? userInformation.nome : 'Carregando...'}</p>
+            <p className="h2">
+              {userInformation ? userInformation.nome : "Carregando..."}
+            </p>
           </div>
         </div>
       </header>

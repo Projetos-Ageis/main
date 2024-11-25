@@ -12,7 +12,7 @@ export const GetOdata = async () => {
   };
 export const GetPosto = async () => {
     try {
-      const response = await api.get("/DonoPosto/postos");
+      const response = await api.get("/Posto/getporpreco");
       return response.data;
     } catch (error) {
       console.error("Erro a puxar informação:", error);

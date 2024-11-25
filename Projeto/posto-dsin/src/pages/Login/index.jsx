@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { BodyContainer, LoginContainer, InputsContainer } from './styles';
 import logoDsin from '../../assets/logoDsin.svg';
 import { GetOdata } from './actions';
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -20,13 +22,15 @@ export function Login() {
       if (response.token) {
         localStorage.setItem('authToken', response.token);
         console.log('Token armazenado com sucesso:', response.token);
-
+        toast.success('Login realizado com sucesso!');
         navigate('/home');
       } else {
         console.log('Token não encontrado na resposta');
+        toast.error('Erro ao fazer login. Tente novamente.');
       }
     } catch (error) {
       console.error('Erro ao tentar logar:', error);
+      toast.error('Erro ao tentar logar. Verifique suas credenciais.');
     }
   };
 

@@ -3,6 +3,8 @@ import logoDsin from "../../assets/logoDsin.svg";
 import { useState, useEffect } from "react";
 import { RegisterAPI } from './actions';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Register() {
   const [nome, setNome] = useState("");
@@ -18,10 +20,12 @@ export function Register() {
     try {
       const response = await RegisterAPI(nome,cnpj,email, senha,telefone);
       console.log(response)
+      toast.success("Cadastro realizado com sucesso!");
 
       navigate('/');
     } catch (error) {
       console.error('Erro ao tentar Registrar:', error);
+      toast.error("Erro ao tentar cadastrar. Tente novamente.");
     }
   };
   return (
