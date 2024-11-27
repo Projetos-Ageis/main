@@ -34,12 +34,38 @@ namespace ProjetoAPI.Controllers
                 return BadRequest(error.Message);
             }
         }
-        [HttpGet("getporid")]
+        [HttpGet("getpordiesel")]
         public IActionResult GetPostos2()
         {
             try
             {
                 var postos = postoService.GetPostos2();
+                return Ok(postos);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+        }
+        [HttpGet("getporetanol")]
+        public IActionResult GetPostos3()
+        {
+            try
+            {
+                var postos = postoService.GetPostos3();
+                return Ok(postos);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
+        }
+        [HttpGet("getporid")]
+        public IActionResult GetPostos4()
+        {
+            try
+            {
+                var postos = postoService.GetPostos4();
                 return Ok(postos);
             }
             catch (Exception error)

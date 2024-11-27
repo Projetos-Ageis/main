@@ -13,6 +13,6 @@ namespace ProjetoAPI.Dtos
         [Required]
         public string? HoraFuncionamento { get; set; }
         [Required]
-        public string? Bandeira { get; set; }
+        public string? NomePosto { get; set; }
     }
 }

@@ -98,18 +98,24 @@ namespace ProjetoAPI.Controllers
         }
         [Authorize]
         [HttpPut("editardonoposto")]
-        public IActionResult EditarDono(int id, [FromBody] DonoPosto donoposto)
+        public IActionResult EditarDono([FromBody] DonoPosto donoposto)
         {
-            if (donoposto == null)
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
             {
-                return BadRequest("Você não passou um Dono de um posto");
+                return Unauthorized("Usuário não identificado.");
             }
-            var sucesso = donoPostoService.EditarDonoPosto(id, donoposto);
-            if (sucesso)
+            int donopostoId = int.Parse(userIdClaim.Value);
+            try
             {
-                return Ok(donoposto);
+                var donoPosto = donoPostoService.EditarDonoPosto(donopostoId, donoposto);
+                return Ok(donoPosto);
             }
-            return BadRequest("Erro ao editar");
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
+
         }
         [Authorize]
         [HttpDelete("deletar")]

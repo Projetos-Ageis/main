@@ -8,6 +8,8 @@ namespace ProjetoAPI.Entidades
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int PostoId { get; set; }
         [Required]
+        public string? NomePosto { get; set; }
+        [Required]
         public string? CNPJ { get; set; }
         [Required]
         public string? Endereco { get; set; }
@@ -15,8 +17,6 @@ namespace ProjetoAPI.Entidades
         public string? Telefone { get; set; }
         [Required]
         public string? HoraFuncionamento { get; set; }
-        [Required]
-        public string? Bandeira { get; set; }
         [Required]
         public float? Gasolina { get; set; }
         [Required]
