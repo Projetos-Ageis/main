@@ -7,12 +7,14 @@ export const BlockContainer = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   padding-bottom: 20px;
   cursor: pointer;
   .bandeira{
-    width: 400px;
+    width: 250px;
+    margin-top: 25px;
+    margin-left: -80px;
   }
   .prices {
     display: flex;

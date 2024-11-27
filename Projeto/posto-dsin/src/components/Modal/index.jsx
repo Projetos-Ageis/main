@@ -4,7 +4,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import arrowDown from "../../assets/arrowDown.svg";
 import arrowUp from "../../assets/arrowUp.svg";
-import ipiranga from "../../assets/ipiranga.svg";
+import ipiranga from "../../assets/logoDsin.svg";
 import seta from "../../assets/seta.svg";
 import {
   InformationsContainer,
@@ -44,6 +44,7 @@ export function Modal({ isOpen, onClose, posto }) {
   }, [posto?.endereco]);
 
   if (!isOpen) return null;
+
 
   return (
     <div

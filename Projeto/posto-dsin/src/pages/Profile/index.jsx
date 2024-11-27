@@ -47,7 +47,7 @@ export function Profile() {
         priceE
       );
       toast.success("Posto cadastrado com sucesso!");
-      navigate("/home");
+      navigate("/mypostos");
     } catch (error) {
       console.error("Erro ao tentar registrar:", error);
     }

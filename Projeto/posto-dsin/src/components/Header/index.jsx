@@ -29,7 +29,7 @@ export function HeaderComp() {
             <div style={{display: "flex",alignItems: "center",gap: '15px'}}>
                 <div className='details' >
                     <p className='h2'>Bem Vindo,</p>
-                    <a href="/profile">{loginResponse?.nome}</a>
+                    <a href="/mypostos">{loginResponse?.nome}</a>
                 </div>
                 <img src={User} alt="" className='user'/>
             </div>

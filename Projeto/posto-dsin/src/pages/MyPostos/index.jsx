@@ -1,61 +1,82 @@
 import { useEffect, useState } from "react";
 import { HeaderContainer, MyPostosContainer } from "./styles";
+import {Loader} from '../Home/styles'
 import { Block } from "../../components/Block";
 import { IoMdArrowBack } from "react-icons/io";
 import { ModalEdit } from "../../components/Edit";
+import { GetPosto } from "./actions";
 
 export function MyPostos() {
   const [postoResponse, setPostoResponse] = useState([]);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPosto, setSelectedPosto] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleBlockClick = (posto) => {
     setSelectedPosto(posto);
     setIsModalOpen(true);
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPosto(null);
   };
 
-  useEffect(() => {
-    // Simula a resposta de uma API
-    const fakePostos = [
-      { id: 1, name: "Posto A", location: "Rua A, 123", status: "Ativo" },
-      { id: 2, name: "Posto B", location: "Rua B, 456", status: "Inativo" },
-      { id: 3, name: "Posto C", location: "Rua C, 789", status: "Ativo" },
-      { id: 1, name: "Posto A", location: "Rua A, 123", status: "Ativo" },
-      { id: 2, name: "Posto B", location: "Rua B, 456", status: "Inativo" },
-      { id: 3, name: "Posto C", location: "Rua C, 789", status: "Ativo" },
-      { id: 1, name: "Posto A", location: "Rua A, 123", status: "Ativo" },
-      { id: 2, name: "Posto B", location: "Rua B, 456", status: "Inativo" },
-      { id: 3, name: "Posto C", location: "Rua C, 789", status: "Ativo" },
-    ];
+  const updatePosto = (updatedPosto) => {
+    setPostoResponse((prevPostos) =>
+      prevPostos.map((posto) =>
+        posto.postoId === updatedPosto.postoId ? updatedPosto : posto
+      )
+    );
+  };
 
-    // Simulando a resposta da API
-    setPostoResponse(fakePostos);
+  useEffect(() => {
+    const informationPostos = async () => {
+      try {
+        setLoading(true);
+        const response = await GetPosto();
+        setPostoResponse(response);
+        console.log(response);
+      } catch (error) {
+        console.error("Erro buscar informação posto:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    informationPostos();
   }, []);
 
   return (
     <MyPostosContainer>
       <HeaderContainer>
         <h1>Meus Postos</h1>
-        <button className="buttonBack">
-            <IoMdArrowBack className="icon"/>
-            <p>Voltar</p>
-        </button>
-        <button className="newPosto">
-            <p>Novo Posto</p>
-        </button>
+        <a href="/home" className="buttonBack">
+          <IoMdArrowBack className="icon" />
+          <p>Voltar</p>
+        </a>
+        <a href="/profile" className="newPosto">
+          <p>Novo Posto</p>
+        </a>
       </HeaderContainer>
-      <div className="blocks">
-        {postoResponse?.map((posto, index) => (
-          <Block information={posto} key={index} onClick={() => handleBlockClick(posto)}/>
-        ))}
-      </div>
-      
-      <ModalEdit isOpen={isModalOpen} onClose={closeModal} posto={selectedPosto}/>
+      {loading ? ( 
+        <Loader />
+      ) : (
+        <div className="blocks">
+          {postoResponse?.map((posto, index) => (
+            <Block
+              information={posto}
+              key={index}
+              onClick={() => handleBlockClick(posto)}
+            />
+          ))}
+        </div>
+      )}
+      <ModalEdit
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        posto={selectedPosto}
+        onUpdate={updatePosto}
+      />
     </MyPostosContainer>
   );
 }

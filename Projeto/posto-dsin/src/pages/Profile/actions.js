@@ -14,7 +14,7 @@ export const NovoPosto = async (
   endereco,
   telefone,
   horaFuncionamento,
-  bandeira,
+  nomePosto,
   gasolina,
   diesel,
   etanol
@@ -25,7 +25,7 @@ export const NovoPosto = async (
       endereco,
       telefone,
       horaFuncionamento,
-      bandeira,
+      nomePosto,
       gasolina,
       diesel,
       etanol,

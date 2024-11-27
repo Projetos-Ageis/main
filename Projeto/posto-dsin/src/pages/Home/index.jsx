@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Modal } from '../../components/Modal';
 import { HeaderComp } from '../../components/Header';
-import { HomeContainer } from './styles';
+import { HomeContainer, Loader } from './styles';
 import { Block } from '../../components/Block';
-import { GetOdata,GetPosto } from './actions';
+import { GetOdata, GetPosto } from './actions';
 
 export function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userResponse, setUserResponse] = useState(null);
   const [selectedPosto, setSelectedPosto] = useState(null);
   const [postoResponse, setPostoResponse] = useState(null);
-  
+  const [loading, setLoading] = useState(true); 
+
   const handleBlockClick = (posto) => {
     setSelectedPosto(posto);
     setIsModalOpen(true);
@@ -19,42 +20,41 @@ export function Home() {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPosto(null);
+    window.location.reload();
   };
 
   useEffect(() => {
-    const information = async () => {
-      
+    const fetchData = async () => {
       try {
-        const response = await GetOdata();
-        setUserResponse(response);
-        console.log(response)
+        setLoading(true);
+        const [userData, postoData] = await Promise.all([GetOdata(), GetPosto()]);
+        setUserResponse(userData);
+        setPostoResponse(postoData);
+        console.log("Usuário:", userData);
+        console.log("Postos:", postoData);
       } catch (error) {
-        console.error("Erro buscar informação usuario:", error);
+        console.error("Erro ao buscar dados:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    const informationPostos = async () => {
-      
-      try {
-        const response = await GetPosto();
-        setPostoResponse(response);
-        console.log(response)
-      } catch (error) {
-        console.error("Erro buscar informação posto:", error);
-      }
-    };
-
-    information();
-    informationPostos();
+    fetchData();
   }, []);
+
   return (
     <HomeContainer>
       <HeaderComp />
-      <div className="blocks">
-        {postoResponse?.map((posto, index) => (
-          <Block information={posto} key={index} onClick={() => handleBlockClick(posto)} />
-        ))}
-      </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} posto={selectedPosto}/>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="blocks">
+          {postoResponse?.map((posto, index) => (
+            <Block information={posto} key={index} onClick={() => handleBlockClick(posto)} />
+          ))}
+        </div>
+      )}
+      <Modal isOpen={isModalOpen} onClose={closeModal} posto={selectedPosto} />
     </HomeContainer>
   );
 }
+

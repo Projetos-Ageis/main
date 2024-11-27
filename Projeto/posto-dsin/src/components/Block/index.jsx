@@ -1,11 +1,11 @@
 import { BlockContainer } from "./styles";
-import Bandeira  from '../../assets/imageIpirangaBlock.svg'
+import Bandeira  from '../../assets/logoDsin.svg'
 
 export function Block({ onClick,information }) {
     return (
         <BlockContainer onClick={onClick}>
             <img src={Bandeira} alt="Bandeira Posto" className="bandeira" />
-            <h1>{information?.bandeira}</h1>
+            <h1>{information?.nomePosto}</h1>
             <div className="prices">
                 <div className="price">
                     <span>Gasolina</span>

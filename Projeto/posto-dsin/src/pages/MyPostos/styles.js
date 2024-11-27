@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const MyPostosContainer = styled.main`
   background-color: ${(props) => props.theme["gray200"]};
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -33,6 +34,7 @@ export const HeaderContainer = styled.header`
     color: ${(props) => props.theme["gray200"]};
     border: none;
     transition: 0.2s;
+    text-decoration: none;
     p {
       font-size: 20px;
     }
@@ -52,6 +54,7 @@ export const HeaderContainer = styled.header`
     background-color: ${(props) => props.theme["yellow300"]};
     color: ${(props) => props.theme.white};
     transition: 0.2s;
+    text-decoration: none;
   }
   .newPosto:hover {
     background-color: ${(props) => props.theme["yellow500"]};

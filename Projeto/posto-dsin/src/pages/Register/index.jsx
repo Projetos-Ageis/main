@@ -52,10 +52,10 @@ export function Register() {
             />
           </InputsContainer>
           <InputsContainer>
-            <p>CNPJ:</p>
+            <p>CPF:</p>
             <input
               type="number"
-              placeholder="CNPJ"
+              placeholder="CPF"
               value={cnpj}
               onChange={(e) => setCNPJ(e.target.value)}
             />
